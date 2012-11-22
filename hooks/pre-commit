@@ -1,0 +1,15 @@
+#!/bin/sh
+# Check to see if we are on master branch. Stop accidental commits
+if [ "`git rev-parse --abbrev-ref HEAD`" == "master" ]
+then
+  if [ -f i_want_to_commit_to_master ]
+  then
+    rm i_want_to_commit_to_master
+    exit 0
+  else
+    echo "Cannot commit to master branch"
+    echo "Remember to create file 'touch i_want_to_commit_to_master' to commit to master"
+  fi
+  exit 1
+fi
+exit 0
